@@ -29,7 +29,7 @@ This system addresses the problem by enabling **exception-based review**, where 
 - Maintains system configuration and monitoring
 
 ## 4. Vision Statement
-***To build a reliable timesheet validation and approval system that reduces manual effort, improves accuracy, and supports managers through automated validation and risk-based prioritization.***
+*To build a reliable timesheet validation and approval system that reduces manual effort, improves accuracy, and supports managers through automated validation and risk-based prioritization.*
 
 
 ## 5. Key Features
@@ -65,12 +65,12 @@ The success of the system will be measured using the following criteria:
 - Historical timesheet data may be simulated for demonstration purposes
 - The project is developed by a student with intermediate programming skills
 
-## 9.Branching Strategy
+## 9. Branching Strategy
 ### Main Principles
-- The 'main' branch always contains stable and working code.
-- New features, enhancements, or changes are developed in separate **feature branches** created from 'main'.
+- The `main` branch always contains stable and working code.
+- New features, enhancements, or changes are developed in separate **feature branches** created from `main`.
 - Each feature branch represents a specific unit of work (for example, Docker setup or documentation updates).
-- Once a feature is completed and tested locally, it is pushed to GitHub and can be merged back into 'main'.
+- Once a feature is completed and tested locally, it is pushed to GitHub and can be merged back into `main`.
 
 ### Branch Naming Convention
 Feature branches follow this naming format: feature/ `<`feature-name`>`
@@ -130,15 +130,18 @@ http://localhost:3000
 #### Backend (API test):
 http://localhost:5000
 
+
 ### Stopping the Application
 To stop all running containers:
+```
 docker-compose down
+```
 
 ### Local Development Tools Used
 
-**VS Code** – Code editor
-**Docker Desktop** – Containerization
-**Docker Compose** – Multi-container orchestration
-**Git & GitHub** – Version control
-**Draw.io** – Architecture diagram
-**Figma** – UI wireframes
+- **VS Code** – Code editor
+- **Docker Desktop** – Containerization
+- **Docker Compose** – Multi-container orchestration
+- **Git & GitHub** – Version control
+- **Draw.io** – Architecture diagram
+- **Figma** – UI wireframes
