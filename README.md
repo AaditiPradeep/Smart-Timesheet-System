@@ -148,10 +148,8 @@ docker-compose down
 
 # 11. Software Design
 
-## Architecture Overview
-
 ### Architecture Diagram
-> Diagram image is located at `docs/architecture-diagram.png` in the repository.
+<img src="docs/design/architecture-diagram.png" width="500" alt="Architecture Diagram">
 
 ### Architectural Style
 The system follows a **Layered Architecture** with **MVC (Model–View–Controller)** applied in the backend.
