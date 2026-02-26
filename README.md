@@ -145,3 +145,32 @@ docker-compose down
 - **Git & GitHub** – Version control
 - **Draw.io** – Architecture diagram
 - **Figma** – UI wireframes
+
+# 11. Software Design
+
+## Architecture Overview
+
+### Architecture Diagram
+> Diagram image is located at `docs/architecture-diagram.png` in the repository.
+
+### Architectural Style
+The system follows a **Layered Architecture** with **MVC (Model–View–Controller)** applied in the backend.
+#### Layers
+
+| Layer | Technology | Responsibility |
+|-------|-----------|----------------|
+| **Presentation Layer** | React Frontend | UI rendering, user interaction, and API communication |
+| **Application Layer** | Express.js Controllers | HTTP request handling, authentication, and request routing |
+| **Business Logic Layer** | Domain Services | Core system behavior — validation, historical analysis, and risk scoring |
+| **Data Layer** | Repositories + MongoDB | Data persistence and database interactions via the repository pattern |
+
+
+### Design Principles Applied
+
+| Principle | How It Is Applied |
+|-----------|------------------|
+| **Abstraction** | Each layer exposes only necessary interfaces to adjacent layers |
+| **Modularity** | Services are separated by responsibility — validation, scoring, and analysis are independent modules |
+| **High Cohesion** | Each module performs a single, well-defined task |
+| **Low Coupling** | Strict unidirectional layer dependency prevents ripple effects across the system |
+| **Separation of Concerns** | UI, routing, domain logic, and persistence are clearly separated into distinct layers |
