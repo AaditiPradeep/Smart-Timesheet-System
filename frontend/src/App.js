@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Login from "./pages/Login";
+import EmployeeDashboard from "./pages/EmployeeDashboard";
+import SubmitTimesheet from "./pages/SubmitTimesheet";
+import ManagerDashboard from "./pages/ManagerDashboard";
+import ReviewTimesheet from "./pages/ReviewTimesheet";
+import AdminConfig from "./pages/AdminConfig";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/employee" element={
+          <ProtectedRoute requiredRole="employee">
+            <EmployeeDashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/submit" element={
+          <ProtectedRoute requiredRole="employee">
+            <SubmitTimesheet />
+          </ProtectedRoute>
+        } />
+        <Route path="/manager" element={
+          <ProtectedRoute requiredRole="manager">
+            <ManagerDashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/review/:id" element={
+          <ProtectedRoute requiredRole="manager">
+            <ReviewTimesheet />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin" element={
+          <ProtectedRoute requiredRole="admin">
+            <AdminConfig />
+          </ProtectedRoute>
+        } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

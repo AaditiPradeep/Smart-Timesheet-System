@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Submit Weekly Timesheet – Wireframe</title>
+<!--
+  ============================================================
+  FIGMA IMPORT INSTRUCTIONS
+  ============================================================
+  1. Install plugin: "HTML to Figma" by Builder.io
+     Figma → Plugins → Browse → search "HTML to Figma"
+  2. Open this file in Chrome
+  3. Figma → Plugins → HTML to Figma → Import from URL
+     paste the file:/// path from Chrome address bar
+  4. Every named id becomes an editable Figma layer
+  ============================================================
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    width: 1200px;
+    color: #111111;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    width: 100%;
+    height: 56px;
+    background: #f5f5f5;
+    border-bottom: 2px solid #333333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+  .nav-title { font-size: 18px; font-weight: 700; }
+  .nav-role  { font-size: 14px; border: 1.5px solid #333333;
+               padding: 5px 16px; background: #ffffff; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 26px 40px 20px;
+    border-bottom: 2px solid #333333;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .page-title    { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .page-subtitle { font-size: 14px; color: #666666; }
+  .status-badge  {
+    border: 1.5px solid #333333;
+    padding: 7px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    background: #f5f5f5;
+  }
+
+  /* ── CONTENT WRAP ── */
+  .content-wrap {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  /* ── MAIN COLUMN ── */
+  .main-col {
+    flex: 1;
+    padding: 28px 32px 36px 40px;
+    border-right: 2px solid #333333;
+    min-width: 0;
+  }
+
+  /* ── RIGHT PANEL ── */
+  .right-panel {
+    width: 290px;
+    flex-shrink: 0;
+    padding: 28px 24px 36px;
+  }
+
+  /* ── WEEK SELECTOR ── */
+  .week-selector-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .week-label {
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .week-dropdown {
+    height: 40px;
+    border: 1.5px solid #333333;
+    padding: 0 14px;
+    font-size: 14px;
+    color: #333333;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+  }
+
+  /* ── TABLE SECTION ── */
+  .table-section {
+    border: 1.5px solid #333333;
+    margin-bottom: 16px;
+  }
+  .table-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 11px 18px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  /* ── ENTRY TABLE ── */
+  .entry-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .entry-table th {
+    border: 1px solid #aaaaaa;
+    padding: 11px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    background: #f5f5f5;
+  }
+
+  /* All body cells */
+  .entry-table tbody td {
+    border: 1px solid #dddddd;
+    padding: 12px 14px;
+    vertical-align: middle;
+  }
+
+  /* Column widths via th */
+  .col-day   { width: 210px; }
+  .col-hours { width: 160px; }
+  .col-desc  { } /* fills remaining space */
+
+  /* Day cell content */
+  .day-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111111;
+    margin-bottom: 5px;
+  }
+  .day-validation {
+    font-size: 11px;
+    color: #bbbbbb;
+  }
+
+  /* Hours input — full width of cell */
+  .input-hours {
+    width: 100%;
+    height: 38px;
+    border: 1.5px solid #333333;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #999999;
+  }
+
+  /* Description input — full width of cell */
+  .input-desc {
+    width: 100%;
+    height: 38px;
+    border: 1.5px solid #333333;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #999999;
+  }
+
+  /* Total row */
+  .tr-total td {
+    background: #f5f5f5;
+    border: 1px solid #aaaaaa;
+    padding: 12px 14px;
+    vertical-align: middle;
+  }
+  .td-total-label {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .td-total-value {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  /* ── HELPER TEXT ── */
+  .helper-text-box {
+    border: 1px solid #cccccc;
+    padding: 12px 18px;
+    margin-bottom: 28px;
+    background: #fafafa;
+    display: flex;
+    gap: 40px;
+  }
+  .helper-item {
+    font-size: 13px;
+    color: #555555;
+  }
+
+  /* ── BOTTOM ACTIONS ── */
+  .bottom-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .btn-draft {
+    height: 44px;
+    padding: 0 32px;
+    border: 2px solid #333333;
+    font-size: 14px;
+    font-weight: 700;
+    background: #ffffff;
+    color: #333333;
+    cursor: pointer;
+  }
+  .btn-submit {
+    height: 44px;
+    padding: 0 32px;
+    border: 2px solid #333333;
+    font-size: 14px;
+    font-weight: 700;
+    background: #333333;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .submit-note {
+    font-size: 12px;
+    color: #888888;
+    margin-top: 8px;
+  }
+
+  /* ── VALIDATION PREVIEW PANEL ── */
+  .validation-box {
+    border: 1.5px solid #333333;
+    background: #ffffff;
+  }
+  .validation-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .validation-body { padding: 16px; }
+
+  .vp-item {
+    border: 1px solid #cccccc;
+    padding: 13px 14px;
+    margin-bottom: 14px;
+    background: #ffffff;
+  }
+  .vp-label {
+    font-size: 11px;
+    color: #777777;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+  }
+  .vp-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+  }
+  .vp-sub {
+    font-size: 12px;
+    color: #999999;
+    margin-top: 4px;
+  }
+
+  .vp-warnings {
+    border: 1px solid #cccccc;
+    padding: 13px 14px;
+    margin-bottom: 14px;
+  }
+  .vp-warnings-label {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .vp-warning-placeholder {
+    font-size: 12px;
+    color: #aaaaaa;
+    line-height: 1.6;
+  }
+
+  .vp-note {
+    font-size: 12px;
+    color: #888888;
+    border-top: 1px solid #eeeeee;
+    padding-top: 12px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 2px solid #333333;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+  }
+  .footer-left  { font-size: 13px; font-weight: 700; }
+  .footer-right { font-size: 12px; color: #888888; }
+</style>
+</head>
+<body>
+<div id="figma-root" style="width:900px; background:#ffffff;">
+
+  <!-- NAV -->
+  <nav class="nav" id="nav-bar">
+    <span class="nav-title">Smart Timesheet Validation &amp; Approval System</span>
+    <span class="nav-role">Role: Employee</span>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header" id="page-header">
+    <div>
+      <div class="page-title">Submit Weekly Timesheet</div>
+      <div class="page-subtitle">Enter your daily hours and task descriptions for the selected week</div>
+    </div>
+    <div class="status-badge" id="status-badge">Status: Draft</div>
+  </div>
+
+  <!-- CONTENT WRAP -->
+  <div class="content-wrap">
+
+    <!-- MAIN COLUMN -->
+    <div class="main-col">
+
+      <!-- WEEK SELECTOR -->
+      <div class="week-selector-row" id="week-selector">
+        <span class="week-label">Select Week:</span>
+        <div class="week-dropdown">
+          <span>Feb 12 – Feb 18, 2025</span>
+          <span>▼</span>
+        </div>
+      </div>
+
+      <!-- ENTRY TABLE -->
+      <div class="table-section" id="table-section">
+        <div class="table-title">Weekly Hours Entry</div>
+        <table class="entry-table" id="entry-table">
+          <thead>
+            <tr>
+              <th class="col-day">Day</th>
+              <th class="col-hours">Hours Worked</th>
+              <th class="col-desc">Task Description</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr id="row-monday">
+              <td>
+                <div class="day-name">Monday, Feb 12</div>
+                <div class="day-validation">Validation message here</div>
+              </td>
+              <td><div class="input-hours">0.0</div></td>
+              <td><div class="input-desc">Enter task description...</div></td>
+            </tr>
+
+            <tr id="row-tuesday">
+              <td>
+                <div class="day-name">Tuesday, Feb 13</div>
+                <div class="day-validation">Validation message here</div>
+              </td>
+              <td><div class="input-hours">0.0</div></td>
+              <td><div class="input-desc">Enter task description...</div></td>
+            </tr>
+
+            <tr id="row-wednesday">
+              <td>
+                <div class="day-name">Wednesday, Feb 14</div>
+                <div class="day-validation">Validation message here</div>
+              </td>
+              <td><div class="input-hours">0.0</div></td>
+              <td><div class="input-desc">Enter task description...</div></td>
+            </tr>
+
+            <tr id="row-thursday">
+              <td>
+                <div class="day-name">Thursday, Feb 15</div>
+                <div class="day-validation">Validation message here</div>
+              </td>
+              <td><div class="input-hours">0.0</div></td>
+              <td><div class="input-desc">Enter task description...</div></td>
+            </tr>
+
+            <tr id="row-friday">
+              <td>
+                <div class="day-name">Friday, Feb 16</div>
+                <div class="day-validation">Validation message here</div>
+              </td>
+              <td><div class="input-hours">0.0</div></td>
+              <td><div class="input-desc">Enter task description...</div></td>
+            </tr>
+
+            <tr id="row-saturday">
+              <td>
+                <div class="day-name">Saturday, Feb 17</div>
+                <div class="day-validation">Validation message here</div>
+              </td>
+              <td><div class="input-hours">0.0</div></td>
+              <td><div class="input-desc">Enter task description...</div></td>
+            </tr>
+
+            <tr id="row-sunday">
+              <td>
+                <div class="day-name">Sunday, Feb 18</div>
+                <div class="day-validation">Validation message here</div>
+              </td>
+              <td><div class="input-hours">0.0</div></td>
+              <td><div class="input-desc">Enter task description...</div></td>
+            </tr>
+
+            <!-- TOTAL ROW -->
+            <tr class="tr-total" id="row-total">
+              <td class="td-total-label">TOTAL</td>
+              <td class="td-total-value">0.0 hrs</td>
+              <td></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- HELPER TEXT -->
+      <div class="helper-text-box" id="helper-text">
+        <span class="helper-item">Maximum 10 hours per day</span>
+        <span class="helper-item">Maximum 60 hours per week</span>
+        <span class="helper-item">Task description required for days with logged hours</span>
+      </div>
+
+      <!-- BOTTOM ACTIONS -->
+      <div id="bottom-actions">
+        <div class="bottom-actions">
+          <button class="btn-draft" id="btn-save-draft">Save as Draft</button>
+          <button class="btn-submit" id="btn-submit">Submit Timesheet</button>
+        </div>
+        <div class="submit-note" id="submit-note">
+          Submission triggers automatic validation and risk scoring. You will be notified of the outcome.
+        </div>
+      </div>
+
+    </div><!-- /main-col -->
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel" id="right-panel">
+
+      <div class="validation-box" id="validation-preview">
+        <div class="validation-title">Validation Preview</div>
+        <div class="validation-body">
+
+          <div class="vp-item" id="vp-total-hours">
+            <div class="vp-label">Current Total Hours</div>
+            <div class="vp-value">0.0 hrs</div>
+            <div class="vp-sub">Updates as you enter hours</div>
+          </div>
+
+          <div class="vp-warnings" id="vp-warnings">
+            <div class="vp-warnings-label">Rule Warnings</div>
+            <div class="vp-warning-placeholder">No warnings yet. Warnings appear here as you fill in hours.</div>
+          </div>
+
+          <div class="vp-item" id="vp-risk-level">
+            <div class="vp-label">Estimated Risk Level</div>
+            <div class="vp-value">—</div>
+            <div class="vp-sub">Low / Medium / High</div>
+          </div>
+
+          <div class="vp-note" id="vp-note">
+            Final validation occurs upon submission. Preview is indicative only.
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /right-panel -->
+
+  </div><!-- /content-wrap -->
+
+  <!-- FOOTER -->
+  <div class="footer" id="footer-bar">
+    <span class="footer-left">Employee Timesheet Submission</span>
+    <span class="footer-right">Week: Feb 12 – Feb 18, 2025 &nbsp;|&nbsp; Employee: John Anderson</span>
+  </div>
+
+</div>
+</body>
+</html>

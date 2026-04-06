@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin – System Configuration</title>
+<!--
+  ============================================================
+  FIGMA IMPORT INSTRUCTIONS
+  ============================================================
+  1. Install plugin: "HTML to Figma" by Builder.io
+     Figma → Plugins → Browse → search "HTML to Figma"
+  2. Open this file in Chrome
+  3. Figma → Plugins → HTML to Figma → Import from URL
+     (paste the file:/// path from Chrome address bar)
+  4. Every named element becomes an editable Figma layer
+  ============================================================
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    width: 1200px;
+    color: #111111;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    width: 100%;
+    height: 52px;
+    background: #f5f5f5;
+    border-bottom: 2px solid #333333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+  .nav-title  { font-size: 14px; font-weight: 700; font-family: Arial, sans-serif; }
+  .nav-role   { font-size: 12px; font-family: Arial, sans-serif;
+                border: 1.5px solid #333333; padding: 5px 14px; background: #ffffff; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 28px 40px 20px;
+    border-bottom: 2px solid #333333;
+  }
+  .page-title    { font-size: 20px; font-weight: 700; font-family: Arial, sans-serif; margin-bottom: 6px; }
+  .page-subtitle { font-size: 12px; color: #666666; font-family: Arial, sans-serif; }
+
+  /* ── CONTENT ── */
+  .content { padding: 28px 40px; }
+
+  /* ── SECTION ── */
+  .section {
+    border: 1.5px solid #333333;
+    margin-bottom: 24px;
+    background: #ffffff;
+  }
+  .section-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+  }
+  .section-body { padding: 20px 20px 16px; }
+
+  /* ── TWO-COLUMN LAYOUT (Section 1) ── */
+  .two-col {
+    display: flex;
+    gap: 20px;
+  }
+  .col-left  { flex: 1.6; }
+  .col-right { flex: 1; }
+
+  /* ── PANEL BOX ── */
+  .panel {
+    border: 1px solid #aaaaaa;
+    background: #ffffff;
+    height: 100%;
+  }
+  .panel-title {
+    border-bottom: 1.5px solid #aaaaaa;
+    padding: 9px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+  }
+  .panel-body { padding: 14px; }
+
+  /* ── TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  .data-table th {
+    border: 1px solid #aaaaaa;
+    padding: 8px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: left;
+    background: #efefef;
+  }
+  .data-table td {
+    border: 1px solid #aaaaaa;
+    padding: 8px 10px;
+    font-size: 11px;
+    font-family: Arial, sans-serif;
+    color: #111111;
+  }
+  .td-action {
+    width: 80px;
+    text-align: center;
+  }
+  .action-btn {
+    border: 1.5px solid #333333;
+    padding: 4px 12px;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    background: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  /* ── ADD USER BUTTON ── */
+  .add-user-row {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .btn-outline {
+    border: 2px solid #333333;
+    padding: 7px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── FORM ELEMENTS ── */
+  .form-group {
+    margin-bottom: 14px;
+  }
+  .form-label {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    margin-bottom: 5px;
+    display: block;
+  }
+  .form-select {
+    width: 100%;
+    height: 32px;
+    border: 1.5px solid #333333;
+    padding: 0 10px;
+    font-size: 11px;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #555555;
+    appearance: none;
+  }
+  .select-wrapper {
+    position: relative;
+  }
+  .select-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: #333333;
+    pointer-events: none;
+  }
+
+  /* ── CHECKBOXES ── */
+  .checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+  .checkbox-row   { display: flex; align-items: center; gap: 8px; }
+  .checkbox-box   {
+    width: 14px; height: 14px;
+    border: 1.5px solid #333333;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+  .checkbox-box.checked { background: #333333; }
+  .checkbox-label { font-size: 11px; font-family: Arial, sans-serif; color: #111111; }
+
+  /* ── TWO-SUBSECTION ROW (Section 2) ── */
+  .subsec-row {
+    display: flex;
+    gap: 20px;
+  }
+  .subsec {
+    flex: 1;
+    border: 1px solid #aaaaaa;
+  }
+  .subsec-title {
+    border-bottom: 1px solid #aaaaaa;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+  }
+  .subsec-body { padding: 14px; }
+
+  /* ── RULE ROW ── */
+  .rule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #dddddd;
+  }
+  .rule-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .rule-text { flex: 1; padding-right: 16px; }
+  .rule-name { font-size: 11px; font-weight: 700; font-family: Arial, sans-serif; margin-bottom: 3px; }
+  .rule-hint { font-size: 10px; color: #777777; font-family: Arial, sans-serif; }
+
+  /* ── NUMERIC INPUT ── */
+  .num-group { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .num-input {
+    width: 64px; height: 30px;
+    border: 1.5px solid #333333;
+    font-size: 13px; font-weight: 700;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #ffffff;
+    color: #111111;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .num-unit { font-size: 9px; color: #666666; font-family: Arial, sans-serif; }
+
+  /* ── TOGGLE ── */
+  .toggle-group { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .toggle-track {
+    width: 52px; height: 24px;
+    border: 1.5px solid #333333;
+    background: #ffffff;
+    display: flex; align-items: center; padding: 3px;
+  }
+  .toggle-knob {
+    width: 16px; height: 16px;
+    border: 1.5px solid #333333;
+    background: #ffffff;
+  }
+  .toggle-knob.on { margin-left: auto; background: #555555; }
+  .toggle-state { font-size: 9px; color: #555555; font-family: Arial, sans-serif; }
+
+  /* ── SECTION 3 RISK BANDS ── */
+  .risk-row {
+    display: flex;
+    gap: 20px;
+  }
+  .risk-card {
+    flex: 1;
+    border: 1px solid #aaaaaa;
+    padding: 14px;
+    background: #ffffff;
+  }
+  .risk-band-name {
+    font-size: 12px; font-weight: 700;
+    font-family: Arial, sans-serif; margin-bottom: 5px;
+  }
+  .risk-band-desc {
+    font-size: 10px; color: #666666;
+    font-family: Arial, sans-serif; line-height: 1.5; margin-bottom: 12px;
+  }
+  .risk-threshold-row {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+  }
+  .risk-threshold-label { font-size: 10px; font-family: Arial, sans-serif; color: #333333; }
+  .risk-input {
+    width: 56px; height: 28px;
+    border: 1.5px solid #333333;
+    font-size: 12px; font-weight: 700;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #ffffff;
+    color: #111111;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .risk-input.readonly {
+    background: #efefef;
+    color: #666666;
+    border-style: dashed;
+  }
+  .risk-outcome {
+    border: 1.5px solid #333333;
+    padding: 6px 10px;
+    font-size: 11px; font-weight: 700;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #efefef;
+    margin-top: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 2px solid #333333;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    background: #ffffff;
+  }
+  .btn-primary {
+    height: 40px; padding: 0 32px;
+    border: 2px solid #333333;
+    font-size: 13px; font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #333333; color: #ffffff;
+    cursor: pointer; letter-spacing: 0.3px;
+  }
+  .btn-secondary {
+    height: 40px; padding: 0 32px;
+    border: 2px solid #333333;
+    font-size: 13px; font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #ffffff; color: #333333;
+    cursor: pointer; letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+<div id="figma-root" style="width:900px; background:#ffffff;">
+
+  <!-- ── NAV BAR ── -->
+  <nav class="nav" id="nav-bar">
+    <span class="nav-title">Smart Timesheet Validation &amp; Approval System</span>
+    <span class="nav-role">Role: Admin</span>
+  </nav>
+
+  <!-- ── PAGE HEADER ── -->
+  <div class="page-header" id="page-header">
+    <div class="page-title">Admin – System Configuration</div>
+    <div class="page-subtitle">Manage users, validation rules, and risk scoring settings</div>
+  </div>
+
+  <!-- ── CONTENT ── -->
+  <div class="content">
+
+    <!-- ════════════════════════════════════════
+         SECTION 1 — User & Role Management
+    ════════════════════════════════════════ -->
+    <div class="section" id="section-user-management">
+      <div class="section-title">Section 1 — User &amp; Role Management</div>
+      <div class="section-body">
+        <div class="two-col">
+
+          <!-- LEFT: Manage Users Table -->
+          <div class="col-left" id="panel-manage-users">
+            <div class="panel">
+              <div class="panel-title">Manage Users</div>
+              <div class="panel-body">
+                <table class="data-table" id="users-table">
+                  <thead>
+                    <tr>
+                      <th>User ID</th>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th class="td-action">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="user-row-1">
+                      <td>EMP001</td>
+                      <td>John Anderson</td>
+                      <td>Employee</td>
+                      <td class="td-action"><span class="action-btn">Edit</span></td>
+                    </tr>
+                    <tr id="user-row-2">
+                      <td>EMP002</td>
+                      <td>Sarah Mitchell</td>
+                      <td>Employee</td>
+                      <td class="td-action"><span class="action-btn">Edit</span></td>
+                    </tr>
+                    <tr id="user-row-3">
+                      <td>MGR001</td>
+                      <td>Lisa Chen</td>
+                      <td>Manager</td>
+                      <td class="td-action"><span class="action-btn">Edit</span></td>
+                    </tr>
+                    <tr id="user-row-4">
+                      <td>ADM001</td>
+                      <td>David Kumar</td>
+                      <td>Admin</td>
+                      <td class="td-action"><span class="action-btn">Edit</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="add-user-row">
+                  <button class="btn-outline" id="btn-add-user">+ Add New User</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Assign Role -->
+          <div class="col-right" id="panel-assign-role">
+            <div class="panel">
+              <div class="panel-title">Assign Role</div>
+              <div class="panel-body">
+
+                <div class="form-group" id="field-select-user">
+                  <label class="form-label">Select User</label>
+                  <div class="select-wrapper">
+                    <select class="form-select">
+                      <option>-- Select a user --</option>
+                      <option>EMP001 – John Anderson</option>
+                      <option>EMP002 – Sarah Mitchell</option>
+                      <option>MGR001 – Lisa Chen</option>
+                    </select>
+                    <span class="select-arrow">▼</span>
+                  </div>
+                </div>
+
+                <div class="form-group" id="field-assign-role">
+                  <label class="form-label">Assign Role</label>
+                  <div class="checkbox-group">
+                    <div class="checkbox-row" id="checkbox-employee">
+                      <div class="checkbox-box checked"></div>
+                      <span class="checkbox-label">Employee</span>
+                    </div>
+                    <div class="checkbox-row" id="checkbox-manager">
+                      <div class="checkbox-box"></div>
+                      <span class="checkbox-label">Manager</span>
+                    </div>
+                    <div class="checkbox-row" id="checkbox-admin">
+                      <div class="checkbox-box"></div>
+                      <span class="checkbox-label">Admin</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                  <button class="btn-outline" id="btn-update-role" style="width:100%; text-align:center;">Update Role</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SECTION 2 — Validation Rule Configuration
+    ════════════════════════════════════════ -->
+    <div class="section" id="section-validation-rules">
+      <div class="section-title">Section 2 — Validation Rule Configuration</div>
+      <div class="section-body">
+        <div class="subsec-row">
+
+          <!-- Subsection A: Time-Based -->
+          <div class="subsec" id="subsec-time-rules">
+            <div class="subsec-title">Subsection A — Time-Based Rules</div>
+            <div class="subsec-body">
+
+              <div class="rule-item" id="rule-max-day">
+                <div class="rule-text">
+                  <div class="rule-name">Maximum Hours Per Day</div>
+                  <div class="rule-hint">Entries exceeding this value will be flagged</div>
+                </div>
+                <div class="num-group">
+                  <div class="num-input">10</div>
+                  <div class="num-unit">hrs / day</div>
+                </div>
+              </div>
+
+              <div class="rule-item" id="rule-max-week">
+                <div class="rule-text">
+                  <div class="rule-name">Maximum Hours Per Week</div>
+                  <div class="rule-hint">Weekly totals above this are flagged automatically</div>
+                </div>
+                <div class="num-group">
+                  <div class="num-input">45</div>
+                  <div class="num-unit">hrs / week</div>
+                </div>
+              </div>
+
+              <div class="rule-item" id="rule-daily-entry">
+                <div class="rule-text">
+                  <div class="rule-name">Require Daily Entry</div>
+                  <div class="rule-hint">Flags days with zero hours logged</div>
+                </div>
+                <div class="toggle-group">
+                  <div class="toggle-track">
+                    <div class="toggle-knob"></div>
+                  </div>
+                  <div class="toggle-state">Disabled</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Subsection B: Anomaly Detection -->
+          <div class="subsec" id="subsec-anomaly">
+            <div class="subsec-title">Subsection B — Anomaly &amp; Pattern Detection</div>
+            <div class="subsec-body">
+
+              <div class="rule-item" id="rule-deviation">
+                <div class="rule-text">
+                  <div class="rule-name">Allowed Deviation from Historical Average</div>
+                  <div class="rule-hint">Submissions deviating beyond this % are flagged as anomalous</div>
+                </div>
+                <div class="num-group">
+                  <div class="num-input">25</div>
+                  <div class="num-unit">% deviation</div>
+                </div>
+              </div>
+
+              <div class="rule-item" id="rule-anomaly-toggle">
+                <div class="rule-text">
+                  <div class="rule-name">Enable Anomaly Detection</div>
+                  <div class="rule-hint">Uses historical patterns to compute anomaly scores. Disable to use rule-based checks only.</div>
+                </div>
+                <div class="toggle-group">
+                  <div class="toggle-track">
+                    <div class="toggle-knob on"></div>
+                  </div>
+                  <div class="toggle-state">Enabled</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SECTION 3 — Risk Scoring Configuration
+    ════════════════════════════════════════ -->
+    <div class="section" id="section-risk-scoring">
+      <div class="section-title">Section 3 — Risk Scoring Configuration</div>
+      <div class="section-body">
+        <div class="risk-row">
+
+          <!-- Band 1: Auto Approve -->
+          <div class="risk-card" id="band-auto-approve">
+            <div class="risk-band-name">Risk Band 1 — Auto Approve</div>
+            <div class="risk-band-desc">Timesheets scoring below this threshold are considered low risk and will be automatically approved without managerial review.</div>
+            <div class="risk-threshold-row">
+              <span class="risk-threshold-label">Score up to:</span>
+              <div class="risk-input">20</div>
+            </div>
+            <div class="risk-outcome">→ AUTO APPROVE</div>
+          </div>
+
+          <!-- Band 2: Quick Review -->
+          <div class="risk-card" id="band-quick-review">
+            <div class="risk-band-name">Risk Band 2 — Quick Review</div>
+            <div class="risk-band-desc">Timesheets scoring between the Auto Approve threshold and this value are flagged for manager attention but can be resolved quickly.</div>
+            <div class="risk-threshold-row">
+              <span class="risk-threshold-label">Score up to:</span>
+              <div class="risk-input">50</div>
+            </div>
+            <div class="risk-outcome">→ QUICK REVIEW</div>
+          </div>
+
+          <!-- Band 3: Detailed Review -->
+          <div class="risk-card" id="band-detailed-review">
+            <div class="risk-band-name">Risk Band 3 — Detailed Review</div>
+            <div class="risk-band-desc">All timesheets scoring above the Quick Review threshold fall here. Manager must inspect each entry individually and provide a decision with reason.</div>
+            <div class="risk-threshold-row">
+              <span class="risk-threshold-label">Score above:</span>
+              <div class="risk-input readonly">51+</div>
+            </div>
+            <div class="risk-outcome">→ DETAILED REVIEW</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ── FOOTER ── -->
+  <div class="footer" id="footer-actions">
+    <button class="btn-secondary" id="btn-reset">Reset to Default</button>
+    <button class="btn-primary" id="btn-save">Save Changes</button>
+  </div>
+
+</div>
+</body>
+</html>

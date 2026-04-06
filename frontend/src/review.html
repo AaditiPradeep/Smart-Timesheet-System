@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Timesheet Review – Wireframe</title>
+<!--
+  ============================================================
+  FIGMA IMPORT INSTRUCTIONS
+  ============================================================
+  1. Install plugin: "HTML to Figma" by Builder.io
+     Figma → Plugins → Browse → search "HTML to Figma"
+  2. Open this file in Chrome
+  3. Figma → Plugins → HTML to Figma → Import from URL
+     (paste the file:/// path from Chrome address bar)
+  4. Every named id becomes an editable Figma layer
+  ============================================================
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    width: 900px;
+    color: #111111;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    width: 100%;
+    height: 52px;
+    background: #f5f5f5;
+    border-bottom: 2px solid #333333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+  .nav-title { font-size: 18px; font-weight: 700; font-family: Arial, sans-serif; }
+  .nav-role  { font-size: 15px; font-family: Arial, sans-serif;
+               border: 1.5px solid #333333; padding: 5px 14px; background: #ffffff; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 24px 40px 18px;
+    border-bottom: 2px solid #333333;
+  }
+  .page-title    { font-size: 26px; font-weight: 700; font-family: Arial, sans-serif; margin-bottom: 8px; }
+
+  .meta-row {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .meta-item {
+    font-size: 14px;
+    color: #444444;
+    font-family: Arial, sans-serif;
+    padding-right: 20px;
+    border-right: 1px solid #aaaaaa;
+    margin-right: 20px;
+    line-height: 1.6;
+  }
+  .meta-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+  .meta-label { font-weight: 700; }
+
+  .status-badge {
+    display: inline-block;
+    border: 1.5px solid #333333;
+    padding: 4px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── CONTENT ── */
+  .content { padding: 24px 40px; }
+
+  /* ── SECTION BLOCK ── */
+  .section {
+    border: 1.5px solid #333333;
+    margin-bottom: 20px;
+    background: #ffffff;
+  }
+  .section-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 9px 18px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+  }
+  .section-body { padding: 18px 20px 16px; }
+
+  /* ── RISK ASSESSMENT PANEL ── */
+  .risk-panel {
+    border: 1.5px solid #333333;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    background: #f9f9f9;
+  }
+
+  .risk-score-box {
+    border: 2px solid #333333;
+    width: 130px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+  .risk-score-label { font-size: 13px; font-family: Arial, sans-serif; color: #666666; margin-bottom: 4px; }
+  .risk-score-value { font-size: 38px; font-weight: 700; font-family: Arial, sans-serif; color: #111111; line-height: 1; }
+
+  .risk-category-box {
+    border: 2px solid #333333;
+    width: 110px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+  .risk-cat-label { font-size: 13px; font-family: Arial, sans-serif; color: #666666; margin-bottom: 4px; }
+  .risk-cat-value { font-size: 24px; font-weight: 700; font-family: Arial, sans-serif; color: #111111; }
+
+  .risk-summary {
+    flex: 1;
+    border: 1.5px solid #aaaaaa;
+    padding: 14px 16px;
+    background: #ffffff;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+  }
+  .risk-summary-title { font-size: 14px; font-weight: 700; font-family: Arial, sans-serif; margin-bottom: 2px; }
+  .risk-summary-item  { font-size: 13px; font-family: Arial, sans-serif; color: #444444;
+                        padding-left: 10px; position: relative; }
+  .risk-summary-item::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: #333333;
+  }
+
+  /* ── TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  .data-table th {
+    border: 1px solid #aaaaaa;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    background: #efefef;
+  }
+  .data-table td {
+    border: 1px solid #aaaaaa;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: #111111;
+  }
+  .td-total {
+    font-weight: 700;
+    background: #f5f5f5;
+  }
+  .td-muted { color: #999999; }
+  .readonly-note {
+    font-size: 13px;
+    color: #888888;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  /* ── VALIDATION BREAKDOWN ── */
+  .two-subsec {
+    display: flex;
+    gap: 20px;
+  }
+  .subsec {
+    flex: 1;
+    border: 1px solid #aaaaaa;
+  }
+  .subsec-title {
+    border-bottom: 1px solid #aaaaaa;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+  }
+  .subsec-body { padding: 14px 16px; }
+
+  .bullet-item {
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: #333333;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 9px;
+    line-height: 1.5;
+  }
+  .bullet-item::before {
+    content: "•";
+    position: absolute;
+    left: 2px;
+    color: #333333;
+  }
+  .bullet-item:last-child { margin-bottom: 0; }
+
+  .placeholder-text {
+    font-size: 11px;
+    font-family: Arial, sans-serif;
+    color: #999999;
+    font-style: italic;
+    border: 1px dashed #bbbbbb;
+    padding: 10px 12px;
+    text-align: center;
+  }
+
+  /* ── DECISION PANEL ── */
+  .textarea-label {
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .textarea-hint {
+    font-size: 13px;
+    color: #777777;
+    font-family: Arial, sans-serif;
+    margin-bottom: 8px;
+  }
+  .textarea-mock {
+    width: 100%;
+    height: 80px;
+    border: 1.5px solid #333333;
+    background: #ffffff;
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 12px;
+  }
+  .textarea-placeholder {
+    font-size: 13px;
+    color: #aaaaaa;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+  }
+
+  .decision-buttons {
+    display: flex;
+    gap: 14px;
+    margin-top: 18px;
+    align-items: center;
+  }
+  .btn-approve {
+    height: 46px;
+    padding: 0 40px;
+    border: 2px solid #333333;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #333333;
+    color: #ffffff;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+  }
+  .btn-reject {
+    height: 46px;
+    padding: 0 40px;
+    border: 2px solid #333333;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #333333;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+  }
+
+  /* ── AUDIT NOTE ── */
+  .audit-note {
+    margin-top: 14px;
+    border: 1px dashed #aaaaaa;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: #888888;
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 2px solid #333333;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+  }
+  .footer-back {
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    border: 1.5px solid #333333;
+    padding: 6px 18px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  .footer-note {
+    font-size: 13px;
+    color: #888888;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div id="figma-root" style="width:900px; background:#ffffff;">
+
+  <!-- ── NAV BAR ── -->
+  <nav class="nav" id="nav-bar">
+    <span class="nav-title">Smart Timesheet Validation &amp; Approval System</span>
+    <span class="nav-role">Role: Manager</span>
+  </nav>
+
+  <!-- ── PAGE HEADER ── -->
+  <div class="page-header" id="page-header">
+    <div class="page-title">Timesheet Review</div>
+    <div class="meta-row">
+      <div class="meta-item"><span class="meta-label">Employee:</span> John Anderson</div>
+      <div class="meta-item"><span class="meta-label">Week:</span> Feb 5 – Feb 11, 2025</div>
+      <div class="meta-item"><span class="meta-label">Submitted:</span> Feb 12, 2025</div>
+    </div>
+    <div class="status-badge">Status: Pending Review</div>
+  </div>
+
+  <!-- ── CONTENT ── -->
+  <div class="content">
+
+    <!-- ════════════════════════════════════
+         SECTION 1 — Risk Assessment Panel
+    ════════════════════════════════════ -->
+    <div class="section" id="section-risk-assessment">
+      <div class="section-title">Section 1 — Risk Assessment Panel</div>
+      <div class="section-body">
+        <div class="risk-panel" id="risk-panel">
+
+          <!-- Score Box -->
+          <div class="risk-score-box" id="risk-score-box">
+            <div class="risk-score-label">RISK SCORE</div>
+            <div class="risk-score-value">9.2</div>
+          </div>
+
+          <!-- Category Box -->
+          <div class="risk-category-box" id="risk-category-box">
+            <div class="risk-cat-label">CATEGORY</div>
+            <div class="risk-cat-value">HIGH</div>
+          </div>
+
+          <!-- Summary -->
+          <div class="risk-summary" id="risk-summary">
+            <div class="risk-summary-title">Summary</div>
+            <div class="risk-summary-item">3 validation rules triggered</div>
+            <div class="risk-summary-item">Deviation from historical average detected</div>
+            <div class="risk-summary-item">Requires detailed managerial review</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SECTION 2 — Timesheet Details
+    ════════════════════════════════════ -->
+    <div class="section" id="section-timesheet-details">
+      <div class="section-title">Section 2 — Timesheet Details (Read-Only)</div>
+      <div class="section-body">
+        <div class="readonly-note">This section is read-only. Data is submitted by the employee and cannot be edited here.</div>
+        <table class="data-table" id="timesheet-table">
+          <thead>
+            <tr>
+              <th style="width: 200px;">Day</th>
+              <th style="width: 160px;">Hours Worked</th>
+              <th>Task Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="row-monday">
+              <td>Monday, Feb 5</td>
+              <td>12.0</td>
+              <td>Backend development and testing</td>
+            </tr>
+            <tr id="row-tuesday">
+              <td>Tuesday, Feb 6</td>
+              <td>11.5</td>
+              <td>Code review and deployment</td>
+            </tr>
+            <tr id="row-wednesday">
+              <td>Wednesday, Feb 7</td>
+              <td>10.0</td>
+              <td>Database optimization</td>
+            </tr>
+            <tr id="row-thursday">
+              <td>Thursday, Feb 8</td>
+              <td>13.0</td>
+              <td>Emergency bug fixes</td>
+            </tr>
+            <tr id="row-friday">
+              <td>Friday, Feb 9</td>
+              <td>8.0</td>
+              <td>Documentation and planning</td>
+            </tr>
+            <tr id="row-saturday">
+              <td>Saturday, Feb 10</td>
+              <td class="td-muted">0.0</td>
+              <td class="td-muted">–</td>
+            </tr>
+            <tr id="row-sunday">
+              <td>Sunday, Feb 11</td>
+              <td class="td-muted">0.0</td>
+              <td class="td-muted">–</td>
+            </tr>
+            <tr id="row-total">
+              <td class="td-total">TOTAL</td>
+              <td class="td-total">54.5 hours</td>
+              <td class="td-total"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SECTION 3 — Validation Breakdown
+    ════════════════════════════════════ -->
+    <div class="section" id="section-validation-breakdown">
+      <div class="section-title">Section 3 — Validation &amp; Anomaly Breakdown</div>
+      <div class="section-body">
+        <div class="two-subsec">
+
+          <!-- Subsection A: Rule Violations -->
+          <div class="subsec" id="subsec-rule-violations">
+            <div class="subsec-title">Subsection A — Rule Violations</div>
+            <div class="subsec-body">
+              <div class="bullet-item">Total hours (54.5) exceeds the maximum weekly limit of 45 hours by 21%</div>
+              <div class="bullet-item">Monday (12h), Tuesday (11.5h), Thursday (13h) each exceed the 10-hour daily limit</div>
+              <div class="bullet-item">3 of 5 working days breach the maximum daily threshold</div>
+            </div>
+          </div>
+
+          <!-- Subsection B: Anomalies -->
+          <div class="subsec" id="subsec-anomaly-findings">
+            <div class="subsec-title">Subsection B — Pattern &amp; Historical Anomalies</div>
+            <div class="subsec-body">
+              <div class="bullet-item">Weekly hours deviate 36% above employee's historical average (40.0 hrs)</div>
+              <div class="bullet-item">Pattern indicates potential overtime without prior approval on record</div>
+              <div class="bullet-item">No weekend hours logged — consistent with historical pattern</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SECTION 4 — Decision Panel
+    ════════════════════════════════════ -->
+    <div class="section" id="section-decision">
+      <div class="section-title">Section 4 — Decision Panel</div>
+      <div class="section-body">
+
+        <label class="textarea-label" for="review-comment">Review Comment (Required if Rejecting)</label>
+        <div class="textarea-hint">Provide a reason if rejecting. Comment will be visible to the employee and logged in the audit trail.</div>
+        <div class="textarea-mock" id="review-comment">
+          <span class="textarea-placeholder">Enter review comment here...</span>
+        </div>
+
+        <div class="decision-buttons" id="decision-buttons">
+          <button class="btn-approve" id="btn-approve">Approve</button>
+          <button class="btn-reject" id="btn-reject">Reject</button>
+        </div>
+
+        <div class="audit-note" id="audit-note">
+          All decisions are logged for audit tracking. Approved and rejected timesheets are stored with timestamp, reviewer name, and comment.
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ── FOOTER ── -->
+  <div class="footer" id="footer-bar">
+    <button class="footer-back" id="btn-back">← Back to Dashboard</button>
+    <span class="footer-note">Timesheet ID: TS-2025-0214 &nbsp;|&nbsp; Reviewed by: Manager</span>
+  </div>
+
+</div>
+</body>
+</html>
