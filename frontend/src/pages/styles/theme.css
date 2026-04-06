@@ -1,0 +1,28 @@
+:root {
+  --primary: #2C3E50;
+  --secondary: #ECF0F1;
+  --accent: #3498DB;
+  --border: #2C3E50;
+  --text: #1E1E1E;
+  --muted: #7F8C8D;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--secondary);
+  color: var(--text);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: 2px solid var(--primary);
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.btn-outline {
+  border: 2px solid var(--primary);
+  background: white;
+  color: var(--primary);
+}

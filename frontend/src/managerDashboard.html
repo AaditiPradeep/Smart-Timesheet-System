@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manager Dashboard – Wireframe</title>
+<!--
+  ============================================================
+  FIGMA IMPORT INSTRUCTIONS
+  ============================================================
+  1. Install plugin: "HTML to Figma" by Builder.io
+     Figma → Plugins → Browse → search "HTML to Figma"
+  2. Open this file in Chrome
+  3. Figma → Plugins → HTML to Figma → Import from URL
+     (paste the file:/// path from Chrome address bar)
+  4. Every named id becomes an editable Figma layer
+  ============================================================
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    width: 1280px;
+    color: #111111;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    width: 100%;
+    height: 56px;
+    background: #f5f5f5;
+    border-bottom: 2px solid #333333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+  .nav-title { font-size: 18px; font-weight: 700; font-family: Arial, sans-serif; }
+  .nav-role  { font-size: 15px; font-family: Arial, sans-serif;
+               border: 1.5px solid #333333; padding: 5px 16px; background: #ffffff; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 28px 40px 20px;
+    border-bottom: 2px solid #333333;
+  }
+  .page-title    { font-size: 26px; font-weight: 700; font-family: Arial, sans-serif; margin-bottom: 6px; }
+  .page-subtitle { font-size: 15px; color: #666666; font-family: Arial, sans-serif; }
+
+  /* ── CONTENT WRAPPER ── */
+  .content-wrap {
+    display: flex;
+    gap: 0;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main-col {
+    flex: 1;
+    padding: 24px 40px 32px 40px;
+  }
+
+  /* ── RIGHT PANEL ── */
+  .right-panel {
+    display: none;
+  }
+
+  /* ── SUMMARY BOXES ── */
+  .summary-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .summary-box {
+    flex: 1;
+    border: 1.5px solid #333333;
+    padding: 16px 14px;
+    background: #ffffff;
+  }
+  .summary-label {
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: #666666;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .summary-value {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    color: #111111;
+  }
+
+  /* ── FILTER SECTION ── */
+  .filter-section {
+    border: 1.5px solid #333333;
+    margin-bottom: 24px;
+    background: #ffffff;
+  }
+  .filter-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+  }
+  .filter-body {
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 160px;
+  }
+  .filter-label {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    color: #333333;
+  }
+  .filter-dropdown {
+    height: 36px;
+    border: 1.5px solid #333333;
+    padding: 0 10px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: #555555;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .filter-dropdown-arrow { font-size: 11px; color: #333333; }
+  .filter-search {
+    height: 36px;
+    border: 1.5px solid #333333;
+    padding: 0 10px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: #aaaaaa;
+    font-style: italic;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ── MAIN TABLE SECTION ── */
+  .table-section {
+    border: 1.5px solid #333333;
+    background: #ffffff;
+  }
+  .table-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+  }
+  .table-hint {
+    font-size: 12px;
+    color: #888888;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    padding: 8px 16px 0;
+  }
+
+  /* ── DATA TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin-top: 8px;
+  }
+  .data-table th {
+    border: 1px solid #aaaaaa;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    background: #f5f5f5;
+  }
+  .data-table td {
+    border: 1px solid #aaaaaa;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: #111111;
+  }
+  .td-action { width: 100px; text-align: center; }
+  .review-btn {
+    border: 2px solid #333333;
+    padding: 5px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    background: #333333;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .risk-high   { font-weight: 700; }
+  .risk-medium { font-weight: 700; }
+  .risk-low    { font-weight: 700; }
+
+  /* ── TABLE FOOTER ROW ── */
+  .table-footer-row td {
+    background: #f9f9f9;
+    font-size: 12px;
+    color: #666666;
+    font-style: italic;
+    text-align: center;
+    padding: 8px 12px;
+    border: 1px solid #dddddd;
+  }
+
+  /* ── PAGINATION ── */
+  .pagination {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #dddddd;
+  }
+  .pagination-info { font-size: 13px; color: #666666; font-family: Arial, sans-serif; }
+  .pagination-btns { display: flex; gap: 8px; }
+  .page-btn {
+    border: 1.5px solid #333333;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  .page-btn.active {
+    background: #333333;
+    color: #ffffff;
+  }
+
+  /* ── RIGHT PANEL: QUICK INSIGHTS ── */
+  .insights-box {
+    border: 1.5px solid #333333;
+    background: #ffffff;
+    margin-bottom: 20px;
+  }
+  .insights-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 9px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+  }
+  .insights-body { padding: 14px; }
+
+  .insight-item {
+    border: 1px solid #aaaaaa;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    background: #ffffff;
+  }
+  .insight-item:last-child { margin-bottom: 0; }
+  .insight-label {
+    font-size: 11px;
+    color: #777777;
+    font-family: Arial, sans-serif;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .insight-value {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    color: #111111;
+  }
+  .insight-sub {
+    font-size: 11px;
+    color: #888888;
+    font-family: Arial, sans-serif;
+    margin-top: 2px;
+  }
+
+  /* ── NOTIFICATION BOX ── */
+  .notif-box {
+    border: 1.5px solid #333333;
+    background: #ffffff;
+  }
+  .notif-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 9px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+  }
+  .notif-body { padding: 12px 14px; }
+  .notif-item {
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333333;
+    padding: 7px 0;
+    border-bottom: 1px solid #eeeeee;
+    line-height: 1.4;
+  }
+  .notif-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .notif-time {
+    font-size: 11px;
+    color: #999999;
+    font-family: Arial, sans-serif;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 2px solid #333333;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+  }
+  .footer-left  { font-size: 13px; font-family: Arial, sans-serif; color: #333333; font-weight: 700; }
+  .footer-right { font-size: 12px; font-family: Arial, sans-serif; color: #888888; font-style: italic; }
+</style>
+</head>
+<body>
+<div id="figma-root" style="width:900px; background:#ffffff;">
+
+  <!-- ── NAV BAR ── -->
+  <nav class="nav" id="nav-bar">
+    <span class="nav-title">Smart Timesheet Validation &amp; Approval System</span>
+    <span class="nav-role">Role: Manager</span>
+  </nav>
+
+  <!-- ── PAGE HEADER ── -->
+  <div class="page-header" id="page-header">
+    <div class="page-title">Manager Dashboard</div>
+    <div class="page-subtitle">Timesheet Review Overview</div>
+  </div>
+
+  <!-- ── CONTENT WRAP: MAIN + RIGHT ── -->
+  <div class="content-wrap">
+
+    <!-- ════════════════════════════════════════
+         MAIN COLUMN
+    ════════════════════════════════════════ -->
+    <div class="main-col">
+
+      <!-- SUMMARY BOXES -->
+      <div class="summary-row" id="summary-row">
+
+        <div class="summary-box" id="summary-total">
+          <div class="summary-label">Total Pending Reviews</div>
+          <div class="summary-value">12</div>
+        </div>
+
+        <div class="summary-box" id="summary-high">
+          <div class="summary-label">High Risk Submissions</div>
+          <div class="summary-value">3</div>
+        </div>
+
+        <div class="summary-box" id="summary-medium">
+          <div class="summary-label">Medium Risk Submissions</div>
+          <div class="summary-value">5</div>
+        </div>
+
+        <div class="summary-box" id="summary-low">
+          <div class="summary-label">Low Risk Submissions</div>
+          <div class="summary-value">4</div>
+        </div>
+
+      </div>
+
+      <!-- FILTER SECTION -->
+      <div class="filter-section" id="filter-section">
+        <div class="filter-title">Filters</div>
+        <div class="filter-body">
+
+          <div class="filter-group" id="filter-status">
+            <div class="filter-label">Filter by Status</div>
+            <div class="filter-dropdown">
+              <span>All Statuses</span>
+              <span class="filter-dropdown-arrow">▼</span>
+            </div>
+          </div>
+
+          <div class="filter-group" id="filter-risk">
+            <div class="filter-label">Filter by Risk Category</div>
+            <div class="filter-dropdown">
+              <span>All Categories</span>
+              <span class="filter-dropdown-arrow">▼</span>
+            </div>
+          </div>
+
+          <div class="filter-group" id="filter-sort">
+            <div class="filter-label">Sort by Risk Score</div>
+            <div class="filter-dropdown">
+              <span>Highest First</span>
+              <span class="filter-dropdown-arrow">▼</span>
+            </div>
+          </div>
+
+          <div class="filter-group" id="filter-search">
+            <div class="filter-label">Search Employee Name</div>
+            <div class="filter-search">Search by name...</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MAIN TABLE -->
+      <div class="table-section" id="table-section">
+        <div class="table-title">Pending Timesheet Reviews</div>
+        <div class="table-hint">Showing 5 of 12 pending timesheets — sorted by risk score (highest first)</div>
+
+        <table class="data-table" id="timesheet-table">
+          <thead>
+            <tr>
+              <th>Employee Name</th>
+              <th>Week</th>
+              <th>Total Hours</th>
+              <th>Risk Score</th>
+              <th>Risk Category</th>
+              <th>Status</th>
+              <th class="td-action">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr id="row-1">
+              <td>John Anderson</td>
+              <td>Feb 5 – Feb 11, 2025</td>
+              <td>54.5 hrs</td>
+              <td>9.2</td>
+              <td class="risk-high">High</td>
+              <td>Pending Review</td>
+              <td class="td-action"><span class="review-btn">Review</span></td>
+            </tr>
+
+            <tr id="row-2">
+              <td>Sarah Mitchell</td>
+              <td>Feb 5 – Feb 11, 2025</td>
+              <td>47.0 hrs</td>
+              <td>6.1</td>
+              <td class="risk-medium">Medium</td>
+              <td>Pending Review</td>
+              <td class="td-action"><span class="review-btn">Review</span></td>
+            </tr>
+
+            <tr id="row-3">
+              <td>David Chen</td>
+              <td>Feb 5 – Feb 11, 2025</td>
+              <td>46.0 hrs</td>
+              <td>5.8</td>
+              <td class="risk-medium">Medium</td>
+              <td>Pending Review</td>
+              <td class="td-action"><span class="review-btn">Review</span></td>
+            </tr>
+
+            <tr id="row-4">
+              <td>Emily Rodriguez</td>
+              <td>Feb 5 – Feb 11, 2025</td>
+              <td>40.0 hrs</td>
+              <td>2.3</td>
+              <td class="risk-low">Low</td>
+              <td>Pending Review</td>
+              <td class="td-action"><span class="review-btn">Review</span></td>
+            </tr>
+
+            <tr id="row-5">
+              <td>Michael Johnson</td>
+              <td>Feb 5 – Feb 11, 2025</td>
+              <td>38.5 hrs</td>
+              <td>1.9</td>
+              <td class="risk-low">Low</td>
+              <td>Pending Review</td>
+              <td class="td-action"><span class="review-btn">Review</span></td>
+            </tr>
+
+            <tr id="row-6">
+              <td>Priya Sharma</td>
+              <td>Feb 5 – Feb 11, 2025</td>
+              <td>52.0 hrs</td>
+              <td>8.7</td>
+              <td class="risk-high">High</td>
+              <td>Pending Review</td>
+              <td class="td-action"><span class="review-btn">Review</span></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <!-- PAGINATION -->
+        <div class="pagination" id="pagination">
+          <div class="pagination-info">Showing 6 of 12 results</div>
+          <div class="pagination-btns">
+            <div class="page-btn">← Prev</div>
+            <div class="page-btn active">1</div>
+            <div class="page-btn">2</div>
+            <div class="page-btn">Next →</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /main-col -->
+
+    <!-- ════════════════════════════════════════
+         RIGHT PANEL
+    ════════════════════════════════════════ -->
+    <div class="right-panel" id="right-panel">
+
+      <!-- QUICK INSIGHTS -->
+      <div class="insights-box" id="quick-insights">
+        <div class="insights-title">Quick Insights</div>
+        <div class="insights-body">
+
+          <div class="insight-item" id="insight-highest">
+            <div class="insight-label">Highest Risk This Week</div>
+            <div class="insight-value">9.2</div>
+            <div class="insight-sub">John Anderson — Feb 5–11</div>
+          </div>
+
+          <div class="insight-item" id="insight-average">
+            <div class="insight-label">Average Risk Score</div>
+            <div class="insight-value">5.67</div>
+            <div class="insight-sub">Across 12 pending submissions</div>
+          </div>
+
+          <div class="insight-item" id="insight-hours">
+            <div class="insight-label">Total Hours Submitted</div>
+            <div class="insight-value">487.5</div>
+            <div class="insight-sub">This week across all employees</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RECENT NOTIFICATIONS -->
+      <div class="notif-box" id="recent-activity">
+        <div class="notif-title">Recent Activity</div>
+        <div class="notif-body">
+
+          <div class="notif-item">
+            Timesheet approved — Emily Rodriguez
+            <span class="notif-time">Today, 10:42 AM</span>
+          </div>
+          <div class="notif-item">
+            High risk flagged — John Anderson
+            <span class="notif-time">Today, 09:15 AM</span>
+          </div>
+          <div class="notif-item">
+            Timesheet rejected — Mark Lee
+            <span class="notif-time">Yesterday, 4:30 PM</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /right-panel -->
+
+  </div><!-- /content-wrap -->
+
+  <!-- ── FOOTER ── -->
+  <div class="footer" id="footer-bar">
+    <span class="footer-left">Manager Dashboard</span>
+    <span class="footer-right">Last refreshed: Feb 25, 2025 — 11:00 AM</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login – Wireframe</title>
+<!--
+  ============================================================
+  FIGMA IMPORT INSTRUCTIONS
+  ============================================================
+  1. Install plugin: "HTML to Figma" by Builder.io
+     Figma → Plugins → Browse → search "HTML to Figma"
+  2. Open this file in Chrome
+  3. Figma → Plugins → HTML to Figma → Import from URL
+     paste the file:/// path from Chrome address bar
+  4. Every named id becomes an editable Figma layer
+  ============================================================
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    width: 1200px;
+    min-height: 820px;
+    display: flex;
+    flex-direction: column;
+    color: #111111;
+  }
+
+  /* ── TOP HEADER ── */
+  .top-header {
+    border-bottom: 2px solid #333333;
+    padding: 40px 40px 32px;
+    text-align: center;
+  }
+  .system-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+  .system-subtitle {
+    font-size: 15px;
+    color: #666666;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── MAIN AREA ── */
+  .main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+  }
+
+  /* ── LOGIN CARD ── */
+  .login-card {
+    width: 480px;
+    border: 2px solid #333333;
+    background: #ffffff;
+  }
+
+  .card-header {
+    border-bottom: 2px solid #333333;
+    padding: 18px 32px;
+    background: #efefef;
+    text-align: center;
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .card-body {
+    padding: 32px 32px 28px;
+  }
+
+  /* ── FORM FIELD ── */
+  .form-field {
+    margin-bottom: 24px;
+  }
+  .field-label {
+    font-size: 14px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 7px;
+  }
+  .field-input {
+    width: 100%;
+    height: 44px;
+    border: 1.5px solid #333333;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    font-size: 14px;
+    color: #aaaaaa;
+  }
+  .field-error {
+    font-size: 12px;
+    color: #aaaaaa;
+    margin-top: 5px;
+    border-left: 2px solid #aaaaaa;
+    padding-left: 8px;
+  }
+
+  /* ── LOGIN BUTTON ── */
+  .btn-login {
+    width: 100%;
+    height: 46px;
+    border: 2px solid #333333;
+    font-size: 15px;
+    font-weight: 700;
+    background: #333333;
+    color: #ffffff;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── DIVIDER ── */
+  .card-divider {
+    border: none;
+    border-top: 1px solid #cccccc;
+    margin: 4px 0 18px;
+  }
+
+  /* ── HELPER TEXT ── */
+  .helper-text {
+    font-size: 13px;
+    color: #666666;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ── ROLE BADGES ── */
+  .role-badges {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .role-badge {
+    border: 1.5px solid #333333;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #f5f5f5;
+  }
+
+  /* ── FORGOT PASSWORD LINK ── */
+  .forgot-row {
+    text-align: right;
+    margin-bottom: 20px;
+    margin-top: -12px;
+  }
+  .forgot-link {
+    font-size: 13px;
+    color: #555555;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 2px solid #333333;
+    padding: 16px 40px;
+    text-align: center;
+    background: #f5f5f5;
+  }
+  .footer-text {
+    font-size: 13px;
+    color: #888888;
+  }
+</style>
+</head>
+<body>
+<div id="figma-root" style="width:900px; background:#ffffff; display:flex; flex-direction:column; min-height:820px;">
+
+  <!-- TOP HEADER -->
+  <div class="top-header" id="top-header">
+    <div class="system-title">Smart Timesheet Validation System</div>
+    <div class="system-subtitle">Role-Based Secure Access</div>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div class="main-area" id="main-area">
+
+    <!-- LOGIN CARD -->
+    <div class="login-card" id="login-card">
+
+      <!-- Card Header -->
+      <div class="card-header" id="card-header">
+        <div class="card-title">Sign In to Your Account</div>
+      </div>
+
+      <!-- Card Body -->
+      <div class="card-body" id="card-body">
+
+        <!-- Employee ID / Email -->
+        <div class="form-field" id="field-email">
+          <label class="field-label">Employee ID or Email</label>
+          <div class="field-input">Enter your employee ID or email...</div>
+          <div class="field-error" id="error-email">Error message placeholder</div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-field" id="field-password">
+          <label class="field-label">Password</label>
+          <div class="field-input">Enter your password...</div>
+          <div class="field-error" id="error-password">Error message placeholder</div>
+        </div>
+
+        <!-- Forgot Password -->
+        <div class="forgot-row" id="forgot-row">
+          <span class="forgot-link">Forgot password?</span>
+        </div>
+
+        <!-- Login Button -->
+        <div class="btn-login" id="btn-login">Login</div>
+
+        <!-- Divider -->
+        <hr class="card-divider">
+
+        <!-- Helper Text -->
+        <div class="helper-text" id="helper-text">
+          Access available for Employee, Manager, and Admin roles
+        </div>
+
+        <!-- Role Badges -->
+        <div class="role-badges" id="role-badges">
+          <span class="role-badge">Employee</span>
+          <span class="role-badge">Manager</span>
+          <span class="role-badge">Admin</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /main-area -->
+
+  <!-- FOOTER -->
+  <div class="footer" id="footer">
+    <div class="footer-text">
+      &copy; 2025 Smart Timesheet Validation and Approval System. All rights reserved.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

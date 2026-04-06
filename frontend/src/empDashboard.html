@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Dashboard – Wireframe</title>
+<!--
+  ============================================================
+  FIGMA IMPORT INSTRUCTIONS
+  ============================================================
+  1. Install plugin: "HTML to Figma" by Builder.io
+     Figma → Plugins → Browse → search "HTML to Figma"
+  2. Open this file in Chrome
+  3. Figma → Plugins → HTML to Figma → Import from URL
+     paste the file:/// path from Chrome address bar
+  4. Every named id becomes an editable Figma layer
+  ============================================================
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+    width: 1200px;
+    color: #111111;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    width: 100%;
+    height: 56px;
+    background: #f5f5f5;
+    border-bottom: 2px solid #333333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+  .nav-title { font-size: 18px; font-weight: 700; }
+  .nav-role  { font-size: 14px; border: 1.5px solid #333333;
+               padding: 5px 16px; background: #ffffff; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 28px 40px 24px;
+    border-bottom: 2px solid #333333;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .page-title    { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .welcome-text  { font-size: 15px; color: #555555; }
+  .btn-submit-new {
+    height: 44px;
+    padding: 0 32px;
+    border: 2px solid #333333;
+    font-size: 14px;
+    font-weight: 700;
+    background: #333333;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  /* ── CONTENT ── */
+  .content { padding: 28px 40px 40px; }
+
+  /* ── SUMMARY BOXES ── */
+  .summary-row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .summary-box {
+    flex: 1;
+    border: 1.5px solid #333333;
+    padding: 16px 18px;
+    background: #ffffff;
+  }
+  .summary-label {
+    font-size: 13px;
+    color: #666666;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .summary-value {
+    font-size: 30px;
+    font-weight: 700;
+    color: #111111;
+  }
+
+  /* ── TABLE SECTION ── */
+  .table-section {
+    border: 1.5px solid #333333;
+    margin-bottom: 14px;
+  }
+  .table-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 11px 18px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  /* ── DATA TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  .data-table th {
+    border: 1px solid #aaaaaa;
+    padding: 11px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    background: #f5f5f5;
+  }
+  .data-table tbody td {
+    border: 1px solid #dddddd;
+    padding: 13px 14px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  /* Column widths */
+  .col-week     { width: 220px; }
+  .col-hours    { width: 130px; }
+  .col-status   { width: 140px; }
+  .col-score    { width: 130px; }
+  .col-category { width: 150px; }
+  .col-action   { width: 110px; }
+
+  /* Action buttons */
+  .td-action { text-align: center; }
+  .action-btn {
+    border: 1.5px solid #333333;
+    padding: 5px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    background: #ffffff;
+    color: #111111;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .action-btn-primary {
+    border: 1.5px solid #333333;
+    padding: 5px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    background: #333333;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  /* ── TABLE FOOTER NOTE ── */
+  .table-note {
+    font-size: 13px;
+    color: #888888;
+    padding: 0 2px;
+    margin-bottom: 28px;
+  }
+
+  /* ── REJECTION DETAIL BOX ── */
+  .rejection-box {
+    border: 1.5px solid #333333;
+    margin-bottom: 28px;
+  }
+  .rejection-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .rejection-body {
+    padding: 16px 18px;
+    display: flex;
+    gap: 24px;
+  }
+  .rejection-item {
+    flex: 1;
+    border: 1px solid #cccccc;
+    padding: 14px 16px;
+  }
+  .rej-week   { font-size: 12px; color: #777777; margin-bottom: 4px; }
+  .rej-reason { font-size: 14px; color: #111111; line-height: 1.5; }
+
+  /* ── QUICK ACTIONS ── */
+  .quick-actions {
+    border: 1.5px solid #333333;
+  }
+  .qa-title {
+    background: #efefef;
+    border-bottom: 1.5px solid #333333;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .qa-body {
+    padding: 16px 18px;
+    display: flex;
+    gap: 16px;
+  }
+  .qa-btn {
+    border: 1.5px solid #333333;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    background: #ffffff;
+    color: #111111;
+    cursor: pointer;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 2px solid #333333;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+  }
+  .footer-left  { font-size: 13px; font-weight: 700; }
+  .footer-right { font-size: 12px; color: #888888; }
+</style>
+</head>
+<body>
+<div id="figma-root" style="width:1000px; background:#ffffff;">
+
+  <!-- NAV -->
+  <nav class="nav" id="nav-bar">
+    <span class="nav-title">Smart Timesheet Validation &amp; Approval System</span>
+    <span class="nav-role">Role: Employee</span>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header" id="page-header">
+    <div>
+      <div class="page-title">Employee Dashboard</div>
+      <div class="welcome-text">Welcome, John Anderson</div>
+    </div>
+    <button class="btn-submit-new" id="btn-submit-new">Submit New Timesheet</button>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- SUMMARY BOXES -->
+    <div class="summary-row" id="summary-row">
+
+      <div class="summary-box" id="summary-total">
+        <div class="summary-label">Total Timesheets Submitted</div>
+        <div class="summary-value">12</div>
+      </div>
+
+      <div class="summary-box" id="summary-approved">
+        <div class="summary-label">Approved This Month</div>
+        <div class="summary-value">3</div>
+      </div>
+
+      <div class="summary-box" id="summary-pending">
+        <div class="summary-label">Pending Reviews</div>
+        <div class="summary-value">2</div>
+      </div>
+
+      <div class="summary-box" id="summary-risk">
+        <div class="summary-label">Average Risk Score</div>
+        <div class="summary-value">4.6</div>
+      </div>
+
+    </div>
+
+    <!-- MY TIMESHEETS TABLE -->
+    <div class="table-section" id="table-section">
+      <div class="table-title">My Timesheets</div>
+      <table class="data-table" id="timesheets-table">
+        <thead>
+          <tr>
+            <th class="col-week">Week</th>
+            <th class="col-hours">Total Hours</th>
+            <th class="col-status">Status</th>
+            <th class="col-score">Risk Score</th>
+            <th class="col-category">Risk Category</th>
+            <th class="col-action">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr id="row-1">
+            <td>Jan 15 – Jan 21, 2025</td>
+            <td>40.0 hrs</td>
+            <td>Approved</td>
+            <td>2.1</td>
+            <td>Low</td>
+            <td class="td-action"><span class="action-btn">View</span></td>
+          </tr>
+
+          <tr id="row-2">
+            <td>Jan 22 – Jan 28, 2025</td>
+            <td>47.0 hrs</td>
+            <td>Pending</td>
+            <td>5.3</td>
+            <td>Medium</td>
+            <td class="td-action"><span class="action-btn">View</span></td>
+          </tr>
+
+          <tr id="row-3">
+            <td>Jan 29 – Feb 4, 2025</td>
+            <td>54.5 hrs</td>
+            <td>Rejected</td>
+            <td>8.7</td>
+            <td>High</td>
+            <td class="td-action"><span class="action-btn">View</span></td>
+          </tr>
+
+          <tr id="row-4">
+            <td>Feb 5 – Feb 11, 2025</td>
+            <td>38.0 hrs</td>
+            <td>Approved</td>
+            <td>1.9</td>
+            <td>Low</td>
+            <td class="td-action"><span class="action-btn">View</span></td>
+          </tr>
+
+          <tr id="row-5">
+            <td>Feb 12 – Feb 18, 2025</td>
+            <td>—</td>
+            <td>Draft</td>
+            <td>N/A</td>
+            <td>—</td>
+            <td class="td-action"><span class="action-btn-primary">Edit</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TABLE NOTE -->
+    <div class="table-note" id="table-note">
+      Risk scores are generated automatically after validation. Draft timesheets do not yet have a risk score.
+    </div>
+
+    <!-- REJECTION DETAIL -->
+    <div class="rejection-box" id="rejection-detail">
+      <div class="rejection-title">Rejection Details</div>
+      <div class="rejection-body">
+        <div class="rejection-item" id="rej-item-1">
+          <div class="rej-week">Jan 29 – Feb 4, 2025</div>
+          <div class="rej-reason">Total hours (54.5) exceeded the weekly maximum of 45 hours. Multiple days above daily limit. Resubmit with corrected entries.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions" id="quick-actions">
+      <div class="qa-title">Quick Actions</div>
+      <div class="qa-body">
+        <button class="qa-btn" id="qa-submit">Submit New Timesheet</button>
+        <button class="qa-btn" id="qa-draft">Continue Draft</button>
+        <button class="qa-btn" id="qa-history">View Full History</button>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- FOOTER -->
+  <div class="footer" id="footer-bar">
+    <span class="footer-left">Employee Dashboard</span>
+    <span class="footer-right">Logged in as: John Anderson &nbsp;|&nbsp; Last login: Feb 25, 2025</span>
+  </div>
+
+</div>
+</body>
+</html>
