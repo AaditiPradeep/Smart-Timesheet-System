@@ -45,7 +45,13 @@ async function submitTimesheet(employee, entries) {
   // ✅ 6. Deviation calculation
   const total = entries.reduce((sum, e) => sum + (e.hours || 0), 0);
   const currentAvg = total / entries.length;
-  const deviation = Math.abs(currentAvg - historicalAvg);
+  let deviation = 0;
+
+    if (historicalAvg === 0) {
+      deviation = 0;
+    } else {
+      deviation = Math.abs(currentAvg - historicalAvg);
+    }
 
   // ✅ 7. Save
   const newTS = new Timesheet({
