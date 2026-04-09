@@ -158,11 +158,10 @@ export default function EmployeeDashboard() {
                     <td>{getRiskCategory(t.risk)}</td>
                     <td>
                       <span
-                      className="action-btn"
-                      onClick={() => navigate(`/review/${t._id}`)}
-                    >
-                      View
-                    </span>
+                    className="action-btn"
+                    onClick={() => navigate(`/review/${t._id}`)}>
+                    View
+                  </span>
                     </td>
                   </tr>
                 );

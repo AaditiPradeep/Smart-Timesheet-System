@@ -1,0 +1,27 @@
+{
+  "name": "smarttimesheet",
+  "version": "1.0.0",
+  "description": "The Smart Timesheet Validation and Approval System is a web-based application designed to simplify and improve the process of employee timesheet submission, validation, and managerial approval.",
+  "main": "testLogin.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AaditiPradeep/Smart-Timesheet-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AaditiPradeep/Smart-Timesheet-System/issues"
+  },
+  "homepage": "https://github.com/AaditiPradeep/Smart-Timesheet-System#readme",
+  "dependencies": {
+    "selenium-webdriver": "^4.42.0"
+  }
+}

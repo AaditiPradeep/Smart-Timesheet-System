@@ -29,7 +29,7 @@ function App() {
           </ProtectedRoute>
         } />
         <Route path="/review/:id" element={
-          <ProtectedRoute requiredRole="manager">
+          <ProtectedRoute requiredRole={["manager", "employee"]}>
             <ReviewTimesheet />
           </ProtectedRoute>
         } />

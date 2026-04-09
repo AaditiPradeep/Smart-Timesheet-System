@@ -3,13 +3,14 @@ import { useState } from "react";
 import axios from "axios";
 import API from "../api";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export default function SubmitTimesheet() {
   // Get logged-in user
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const currentUsername = user.username || "User";
-
+  const navigate = useNavigate();
   const days = [
     "Monday",
     "Tuesday",
@@ -110,9 +111,9 @@ useEffect(() => {
           description: e.description,
         })),
       });
-
       console.log("Submitted:", res.data);
       alert("Timesheet submitted successfully!");
+      navigate("/employee");
     } catch (err) {
       console.error(err);
       alert("Error submitting timesheet");
@@ -213,12 +214,17 @@ useEffect(() => {
             </table>
           </div>
 
-          {/* HELPER */}
           <div className="helper-text-box">
-            <span>Max {rules.maxHoursPerDay} hrs/day</span>
-<span>Max {rules.maxHoursPerWeek} hrs/week</span>
-            <span>Description required</span>
+          <div className="helper-item">
+            Max {rules.maxHoursPerDay} hrs/day
           </div>
+          <div className="helper-item">
+            Max {rules.maxHoursPerWeek} hrs/week
+          </div>
+          <div className="helper-item">
+            Description required
+          </div>
+        </div>
 
           {/* BUTTONS */}
           <div className="bottom-actions">

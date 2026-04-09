@@ -55,13 +55,6 @@ export default function AdminConfig() {
         <span className="nav-role">Role: Admin</span>
       </div>
 
-  
-      <div className="page-header">
-        <div className="page-title">System Configuration</div>
-        <div className="page-subtitle">
-          Manage validation rules and thresholds
-        </div>
-      </div>
 
       <div className="content">
 

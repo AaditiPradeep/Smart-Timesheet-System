@@ -10,7 +10,7 @@ export default function ProtectedRoute({ children, requiredRole }) {
   const userData = JSON.parse(user);
 
   // If a role is required and user doesn't have it, redirect to login
-  if (requiredRole && userData.role !== requiredRole) {
+  if (requiredRole && !requiredRole.includes(userData.role)) {
     return <Navigate to="/" replace />;
   }
 
